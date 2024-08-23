@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Goblin's Treasure/Scenes/InitialScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Goblin's Treasure/Scenes/MainMenu.unity
+    guid: 6fd0ad861037ffc42a3fb60b093a8b7c
   m_configObjects: {}

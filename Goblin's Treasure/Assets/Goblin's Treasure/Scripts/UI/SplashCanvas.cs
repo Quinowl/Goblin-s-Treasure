@@ -4,35 +4,40 @@ using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 using DG.Tweening;
 using UnityEngine.InputSystem;
+using GoblinsTreasure.Scripts.Commands;
 
-public class SplashCanvas : MonoBehaviour {
+namespace GoblinsTreasure.Scripts.UI {
 
-    [SerializeField] private TMP_Text _pressAnyKeyText;
+    public class SplashCanvas : MonoBehaviour {
 
-    private bool _hasStarted;
-    private TweenerCore<Color, Color, ColorOptions> _blinkDotween;
+        [SerializeField] private TMP_Text _pressAnyKeyText;
 
-    private void Awake() {
+        private bool _hasStarted;
+        private TweenerCore<Color, Color, ColorOptions> _blinkDotween;
 
-        _blinkDotween = _pressAnyKeyText.DOFade(0, 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+        private void Awake() {
+
+            _blinkDotween = _pressAnyKeyText.DOFade(0, 0.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+        }
+
+        private void Update() {
+
+            _blinkDotween.Play();
+        }
+
+        private void OnAny(InputValue value) {
+
+            if (_hasStarted) return;
+            GoToMainMenu();
+        }
+
+        private async void GoToMainMenu() {
+
+            _hasStarted = true;
+            _pressAnyKeyText.enabled = false;
+
+            await new LoadSceneCommand(Constants.SCENE_MAIN_MENU).Execute();
+        }
     }
 
-    private void Update() {
-
-        _blinkDotween.Play();       
-    }
-
-    private void OnAny(InputValue value) {
-
-        if (_hasStarted) return;
-        
-    }
-
-    private async void GoToMainMenu() {
-
-        _hasStarted = true;
-        _pressAnyKeyText.enabled = false;
-
-        await new LoadSceneCommand("MainMenu").Execute();
-    }
 }

@@ -1,30 +1,34 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-public class CommandQueue {
+namespace GoblinsTreasure.Scripts.Commands {
 
-    private readonly Queue<ICommand> _commandsToExecute;
-    private bool _isExecutingCommand;
+    public class CommandQueue {
 
-    public CommandQueue() => _commandsToExecute = new Queue<ICommand>();
+        private readonly Queue<ICommand> _commandsToExecute;
+        private bool _isExecutingCommand;
 
-    public void AddCommand(ICommand newCommand) {
+        public CommandQueue() => _commandsToExecute = new Queue<ICommand>();
 
-        _commandsToExecute.Enqueue(newCommand);
-        ExecuteNextCommand().WrapErrors();
-    }
+        public void AddCommand(ICommand newCommand) {
 
-    private async Task ExecuteNextCommand() {
-
-        if (_isExecutingCommand) return;
-
-        while (_commandsToExecute.Count > 0) {
-
-            _isExecutingCommand = true;
-            ICommand currentCommand = _commandsToExecute.Dequeue();
-            await currentCommand.Execute();
+            _commandsToExecute.Enqueue(newCommand);
+            ExecuteNextCommand().WrapErrors();
         }
 
-        _isExecutingCommand = false;
+        private async Task ExecuteNextCommand() {
+
+            if (_isExecutingCommand) return;
+
+            while (_commandsToExecute.Count > 0) {
+
+                _isExecutingCommand = true;
+                ICommand currentCommand = _commandsToExecute.Dequeue();
+                await currentCommand.Execute();
+            }
+
+            _isExecutingCommand = false;
+        }
     }
+
 }

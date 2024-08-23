@@ -1,7 +1,11 @@
+using GoblinsTreasure.Scripts.UI;
 using System.Threading.Tasks;
-using UnityEngine;
 
-public class FadeInCommand : ICommand {
+namespace GoblinsTreasure.Scripts.Commands {
 
-    public async Task Execute() => await ServiceLocator.Instance.GetService<ScreenFade>().FadeIn();
+    public class FadeInCommand : ICommand {
+
+        public async Task Execute() => await ServiceLocator.Instance.GetService<ScreenFade>().FadeIn();
+    }
+
 }

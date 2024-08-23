@@ -3,41 +3,45 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScreenFade : MonoBehaviour {
+namespace GoblinsTreasure.Scripts.UI {
 
-    [SerializeField] private Image _image;
+    public class ScreenFade : MonoBehaviour {
 
-    private bool _isFinished;
+        [SerializeField] private Image _image;
 
-    private void Awake() => _image.enabled = false;
+        private bool _isFinished;
 
-    public async Task FadeIn() {
+        private void Awake() => _image.enabled = false;
 
-        _isFinished = false;
-        _image.SetAlpha(0);
-        _image.enabled = true;
+        public async Task FadeIn() {
 
-        _image.DOFade(1, 0.5f).Play().OnComplete(() => {
+            _isFinished = false;
+            _image.SetAlpha(0);
+            _image.enabled = true;
 
+            _image.DOFade(1, 0.5f).Play().OnComplete(() => {
+
+                _image.SetAlpha(1);
+                _isFinished = true;
+            });
+
+            while (!_isFinished) await Task.Yield();
+        }
+
+        public async Task FadeOut() {
+
+            _isFinished = false;
             _image.SetAlpha(1);
-            _isFinished = true;
-        });
+            _image.enabled = true;
 
-        while (!_isFinished) await Task.Yield();
+            _image.DOFade(0, 0.5f).Play().OnComplete(() => {
+
+                _image.enabled = false;
+                _isFinished = true;
+            });
+
+            while (!_isFinished) await Task.Yield();
+        }
     }
 
-    public async Task FadeOut() {
-
-        _isFinished = false;
-        _image.SetAlpha(1);
-        _image.enabled = true;
-
-        _image.DOFade(0, 0.5f).Play().OnComplete(() => {
-
-            _image.enabled = false;
-            _isFinished = true;
-        });
-
-        while (!_isFinished) await Task.Yield();
-    }
 }

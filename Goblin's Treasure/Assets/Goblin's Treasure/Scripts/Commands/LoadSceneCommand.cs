@@ -1,26 +1,31 @@
+using GoblinsTreasure.Scripts.UI;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
-public class LoadSceneCommand : ICommand {
+namespace GoblinsTreasure.Scripts.Commands {
 
-    private readonly string _sceneName;
+    public class LoadSceneCommand : ICommand {
 
-    public LoadSceneCommand(string sceneName) => _sceneName = sceneName;
+        private readonly string _sceneName;
 
-    public async Task Execute() {
+        public LoadSceneCommand(string sceneName) => _sceneName = sceneName;
 
-        await new FadeInCommand().Execute();
-        LoadingScreen loadingScreen = ServiceLocator.Instance.GetService<LoadingScreen>();
-        loadingScreen.Show();
-        await LoadScene(_sceneName);
-        loadingScreen.Hide();
-        await new FadeOutCommand().Execute();
+        public async Task Execute() {
+
+            await new FadeInCommand().Execute();
+            LoadingScreen loadingScreen = ServiceLocator.Instance.GetService<LoadingScreen>();
+            loadingScreen.Show();
+            await LoadScene(_sceneName);
+            loadingScreen.Hide();
+            await new FadeOutCommand().Execute();
+        }
+
+        private async Task LoadScene(string sceneName) {
+
+            var loadSceneAsync = SceneManager.LoadSceneAsync(sceneName);
+            while (!loadSceneAsync.isDone) await Task.Yield();
+            await Task.Yield();
+        }
     }
 
-    private async Task LoadScene(string sceneName) {
-
-        var loadSceneAsync = SceneManager.LoadSceneAsync(sceneName);
-        while (!loadSceneAsync.isDone) await Task.Yield();
-        await Task.Yield();
-    }
 }

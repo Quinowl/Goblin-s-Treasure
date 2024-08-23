@@ -1,20 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+using GoblinsTreasure.Scripts.Commands;
+using GoblinsTreasure.Scripts.UI;
 using UnityEngine;
 
-public class GlobalInstaller : MonoBehaviour {
+namespace GoblinsTreasure.Scripts.Systems {
 
-    [Header("UI")]
-    [SerializeField] private LoadingScreen _loadingScreen;
-    [SerializeField] private ScreenFade _screenFade;
+    public class GlobalInstaller : MonoBehaviour {
 
-    private void Awake() {
+        [Header("UI")]
+        [SerializeField] private LoadingScreen _loadingScreen;
+        [SerializeField] private ScreenFade _screenFade;
 
-        DontDestroyOnLoad(_loadingScreen);
-        DontDestroyOnLoad(_screenFade);
+        private void Awake() {
 
-        ServiceLocator.Instance.RegisterService(_loadingScreen);
-        ServiceLocator.Instance.RegisterService(_screenFade);
-        ServiceLocator.Instance.RegisterService(new CommandQueue());
+            DontDestroyOnLoad(_loadingScreen);
+            DontDestroyOnLoad(_screenFade);
+
+            ServiceLocator.Instance.RegisterService(_loadingScreen);
+            ServiceLocator.Instance.RegisterService(_screenFade);
+            ServiceLocator.Instance.RegisterService(new CommandQueue());
+        }
     }
+
 }
