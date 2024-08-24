@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 
 namespace GoblinsTreasure.Scripts.Commands {
+
     public class LoadGameSceneCommand : ICommand {
 
         public async Task Execute() {
