@@ -4,11 +4,11 @@ namespace GoblinsTreasure.Scripts.GameStates {
 
     public class PlayingState : IGameState {
 
-        private readonly GameData _gameData;
+        private readonly GameDataSO _gameData;
 
         private EventQueue _eventQueue;
 
-        public PlayingState(GameData gameData) => _gameData = gameData;
+        public PlayingState(GameDataSO gameData) => _gameData = gameData;
 
         public void Start() {
 

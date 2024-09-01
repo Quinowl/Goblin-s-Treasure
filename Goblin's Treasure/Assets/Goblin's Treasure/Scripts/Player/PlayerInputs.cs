@@ -5,21 +5,28 @@ namespace GoblinsTreasure.Scripts.Player {
 
     public class PlayerInputs : MonoBehaviour {
 
+        [SerializeField] private PlayerInput _playerInput;
+
         private Player _player;
-        private PlayerInput _playerInput;
 
         public void Configure(Player player) {
-        
+
             _player = player;
         }
 
         private void Awake() {
 
-            _playerInput = GetComponent<PlayerInput>();
-
-
+            if (!_playerInput) _playerInput = GetComponent<PlayerInput>();
         }
 
-    }
+        private void OnMove(InputValue value) {
 
+            _player.OnMoveInput(value.Get<float>());
+        }
+
+        private void OnJump(InputValue _) {
+
+            _player.OnJumpInput();
+        }
+    }
 }

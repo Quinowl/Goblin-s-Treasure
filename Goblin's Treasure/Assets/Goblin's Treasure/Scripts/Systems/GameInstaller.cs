@@ -8,7 +8,7 @@ namespace GoblinsTreasure.Scripts.Systems {
 
         [SerializeField] private GameStateController _gameStateController;
         [SerializeField] private EventQueue _eventQueue;
-        [SerializeField] private GameData _gameData;
+        [SerializeField] private GameDataSO _gameData;
 
         private void Awake() {
 

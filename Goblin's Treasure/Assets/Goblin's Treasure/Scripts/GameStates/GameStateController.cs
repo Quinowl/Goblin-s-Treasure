@@ -6,9 +6,9 @@ namespace GoblinsTreasure.Scripts.GameStates {
 
         private IGameState _currentState;
 
-        public GameData GameData { get; private set; }
+        public GameDataSO GameData { get; private set; }
 
-        public void Init(GameData gameData) => GameData = gameData;
+        public void Init(GameDataSO gameData) => GameData = gameData;
 
         private void Reset() => SwitchState(new InitialState());
 
@@ -19,6 +19,8 @@ namespace GoblinsTreasure.Scripts.GameStates {
         }
 
         private void Update() {
+
+
 
             _currentState.Update();
         }

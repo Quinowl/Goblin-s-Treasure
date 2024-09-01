@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "PlayerData", menuName = "Scriptables/Data/Player")]
 public class PlayerStatsSO : ScriptableObject {
 
     [field: SerializeField] public PlayerStats Stats { get; private set; }
@@ -10,22 +11,24 @@ public class PlayerStatsSO : ScriptableObject {
     }
 }
 
+[System.Serializable]
 public struct PlayerStats {
 
     [Header("Stats")]
     public float Health;
     public float MoveSpeed;
     [HideInInspector] public float JumpForce;
-    public float JumpHeight;
-    public float TimeToApex;
-    public float Gravity;
-    public float GravityScale;
+    [Tooltip("Height in units to be reached in the jump")] public float JumpHeight;
+    [Tooltip("Time it will take to reach the set height")] public float TimeToApex;
+    [HideInInspector] public float GravityScale;
 
+    /// <summary> This method calculates the gravity-related fields based on jump height and time to apex. </summary>
     public void CalculateGravityFields() {
 
-        // Calculates gravity strength based of gravity formule
-        Gravity = -(2 * JumpHeight) / Mathf.Pow(TimeToApex, 2);
-        GravityScale = Gravity / Physics2D.gravity.y;
-        JumpForce = Mathf.Abs(Gravity) * TimeToApex;
+        // Physics2D.gravity.y is typically a negative value, so we calculate a positive gravity force
+        GravityScale = -(2 * JumpHeight) / (Mathf.Pow(TimeToApex, 2) * Physics2D.gravity.y);
+
+        // JumpForce is the initial velocity required to reach the apex of the jump
+        JumpForce = Mathf.Abs(Physics2D.gravity.y * GravityScale) * TimeToApex;
     }
 }
