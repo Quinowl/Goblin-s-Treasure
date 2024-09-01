@@ -12,6 +12,7 @@ namespace GoblinsTreasure.Scripts.Player {
 
         // ===== EVENTS =====
         public abstract void OnStatsUpdated();
+        public abstract bool IsGrounded();
         public abstract void ResetPlayer();
     }
 

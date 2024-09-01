@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   <Stats>k__BackingField:
-    Health: 0.59
+    Health: 100
     MoveSpeed: 15
     JumpForce: 0
-    JumpHeight: 0
-    TimeToApex: 0
+    JumpHeight: 3
+    TimeToApex: 0.5
     GravityScale: 0

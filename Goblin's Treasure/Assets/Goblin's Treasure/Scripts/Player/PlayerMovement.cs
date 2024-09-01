@@ -4,15 +4,15 @@ namespace GoblinsTreasure.Scripts.Player {
 
     public class PlayerMovement : MonoBehaviour {
 
-        private Player _player;
         [SerializeField] private Rigidbody2D _rigidbody2D;
+
+        private Player _player;
         private float _moveDir;
         private float _moveSpeed;
 
         private bool _canMove = true;
 
         public float MoveDir {
-
             get => _moveDir;
             set => _moveDir = value;
         }
