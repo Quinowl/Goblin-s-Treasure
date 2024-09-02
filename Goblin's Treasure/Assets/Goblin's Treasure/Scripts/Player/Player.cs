@@ -9,6 +9,7 @@ namespace GoblinsTreasure.Scripts.Player {
         // ===== INPUTS =====
         public abstract void OnMoveInput(float value);
         public abstract void OnJumpInput();
+        public abstract void OnJumpCancelInput();
 
         // ===== EVENTS =====
         public abstract void OnStatsUpdated();

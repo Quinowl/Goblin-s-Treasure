@@ -32,6 +32,7 @@ namespace GoblinsTreasure.Scripts.Player {
         }
 
         public override void OnJumpInput() => _playerJump.TryJump();
+        public override void OnJumpCancelInput() => _playerJump.CancelJump();
 
         public override void OnMoveInput(float value) {
 

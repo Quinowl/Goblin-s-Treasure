@@ -15,7 +15,8 @@ MonoBehaviour:
   <Stats>k__BackingField:
     Health: 100
     MoveSpeed: 15
-    JumpForce: 0
+    JumpForce: 12
     JumpHeight: 3
     TimeToApex: 0.5
-    GravityScale: 0
+    GravityScale: 2.4464831
+    JumpCancelDivisor: 2

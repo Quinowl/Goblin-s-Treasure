@@ -12,15 +12,16 @@ public class PlayerStatsSO : ScriptableObject {
 }
 
 [System.Serializable]
-public struct PlayerStats {
+public class PlayerStats {
 
     [Header("Stats")]
     public float Health;
     public float MoveSpeed;
     [HideInInspector] public float JumpForce;
-    [Tooltip("Height in units to be reached in the jump")] public float JumpHeight;
-    [Tooltip("Time it will take to reach the set height")] public float TimeToApex;
+    [Tooltip("Height in units to be reached in the jump"), SerializeField] private float JumpHeight;
+    [Tooltip("Time it will take to reach the set height"), SerializeField] private float TimeToApex;
     [HideInInspector] public float GravityScale;
+    public float JumpCancelDivisor;
 
     /// <summary> This method calculates the gravity-related fields based on jump height and time to apex. </summary>
     public void CalculateGravityFields() {
