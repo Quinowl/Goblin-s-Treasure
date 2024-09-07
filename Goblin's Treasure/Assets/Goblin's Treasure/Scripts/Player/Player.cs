@@ -6,6 +6,9 @@ namespace GoblinsTreasure.Scripts.Player {
 
         public PlayerStats CurrentStats { get; protected set; }
 
+        // ===== PROPERTIES =====
+        public float MovementDirection { get; protected set; }
+
         // ===== INPUTS =====
         public abstract void OnMoveInput(float value);
         public abstract void OnJumpInput();

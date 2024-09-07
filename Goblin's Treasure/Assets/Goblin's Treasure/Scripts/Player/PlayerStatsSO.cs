@@ -22,6 +22,7 @@ public class PlayerStats {
     [Tooltip("Time it will take to reach the set height"), SerializeField] private float TimeToApex;
     [HideInInspector] public float GravityScale;
     public float JumpCancelDivisor;
+    public float PushForce;
 
     /// <summary> This method calculates the gravity-related fields based on jump height and time to apex. </summary>
     public void CalculateGravityFields() {

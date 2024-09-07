@@ -20,3 +20,4 @@ MonoBehaviour:
     TimeToApex: 0.5
     GravityScale: 2.4464831
     JumpCancelDivisor: 2
+    PushForce: 5
